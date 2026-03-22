@@ -6,13 +6,16 @@ import Reviews from "@/features/reviews";
 import Stats from "@/features/stats";
 import UpcomingEvents from "@/features/upcomingEvents";
 
-export default function Home() {
+export default async function Home({ searchParams }) {
+  const params = await searchParams;
+  const filter = params.filter || "latest";
+
   return (
     <div>
       <Header />
       <HeroSection connect={true} />
       <Stats />
-      <UpcomingEvents />
+      <UpcomingEvents filter={filter} />
       <Reviews />
       <PastEvents />
       <Footer />

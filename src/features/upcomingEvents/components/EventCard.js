@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FiCalendar, FiMapPin, FiBookmark } from "react-icons/fi";
 
 export default function EventCard({
+  id,
   image,
   date,
   title,
@@ -11,10 +13,16 @@ export default function EventCard({
   location,
 }) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-[#eaeaea]">
+    <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-[#eaeaea] h-full">
       {/* Image Container */}
       <div className="relative w-full h-48 md:h-56">
-        <Image src={image} alt={title} fill className="object-cover" />
+        <Image
+          src={image || "/images/event.png"}
+          alt={title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
         {/* Date Badge */}
         <div className="absolute -bottom-4 right-4 bg-white px-3 py-2 rounded-full shadow flex items-center gap-1">
           <FiCalendar className="text-[#36B3BA] w-4 h-4" />
@@ -31,9 +39,9 @@ export default function EventCard({
             </h3>
             <p className="text-[#555] text-sm font-semibold">by {organizer}</p>
           </div>
-          <button className="text-[#888] hover:text-[#36B3BA] transition-colors p-1">
+          <span className="text-[#888] hover:text-[#36B3BA] transition-colors p-1">
             <FiBookmark className="w-5 h-5" />
-          </button>
+          </span>
         </div>
 
         <div className="mt-4 mb-6 flex flex-col gap-1">
@@ -51,10 +59,12 @@ export default function EventCard({
             <FiMapPin className="w-4 h-4" />
             <span className="text-xs">{location}</span>
           </div>
-          {/* See more link */}
-          <button className="text-[#36B3BA] text-xs font-semibold hover:underline flex items-center">
-            See more <span className="ml-0.5">&gt;</span>
-          </button>
+          {/* See more label */}
+          <Link href={`/events/${id}`} className="block">
+            <span className="text-[#36B3BA] text-xs font-semibold hover:underline flex items-center">
+              See more <span className="ml-0.5">&gt;</span>
+            </span>
+          </Link>
         </div>
       </div>
     </div>
