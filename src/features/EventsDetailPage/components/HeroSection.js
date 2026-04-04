@@ -21,7 +21,7 @@ function HeroSection({ event, eventId }) {
             {formatDate(event.event_date)} &nbsp;&bull;&nbsp; {event.location}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <ButtonsInHeroSection eventId={eventId} />
+            <ButtonsInHeroSection event={event} eventId={eventId} />
           </div>
         </div>
       </div>
